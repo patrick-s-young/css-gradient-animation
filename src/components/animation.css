@@ -1,0 +1,16 @@
+
+@property --scaler {
+  syntax: '<number>'; /* Define the type as a number */
+  inherits: false;    /* Set whether it inherits from parent elements */
+  initial-value: 0;   /* Provide an initial value */
+}
+
+@keyframes scalerKeyframes {
+  0% {
+    --scaler: 0;
+  }
+  100% {
+    --scaler: 100;
+  }
+}
+

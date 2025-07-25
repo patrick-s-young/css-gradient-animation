@@ -1,0 +1,46 @@
+@import '../animation.css';
+
+.Display-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0 10px 0 10px;
+  height: 80px;
+  border: 2px inset rgb(178, 176, 176);
+  background-color: #000000;
+  font-size: 64px;
+  font-weight: 600;
+  color: rgb(242, 26, 26);
+  text-shadow: 0 0 20px rgba(242, 31, 31, 1);
+  padding: 10px;
+  border-radius: 10px;
+  animation: scalerKeyframes 10s ease-in-out infinite alternate;
+  background-image:   linear-gradient(90deg, rgba(117, 117, 117, 0.2) 0%, rgba(242, 26, 26, 0.4) calc(1% * var(--scaler)), rgba(117, 117, 117, 0.2) 100%);
+}
+
+.Display-wrapper .scanlines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/scanlines-100-400.png');
+  mix-blend-mode: darken; 
+  opacity: 0.35;
+  background-size: 50% 100%;
+}
+
+/* .Display-wrapper .gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(90deg, rgba(117, 117, 117, 0.2) 0%, rgba(219, 219, 219, .8) calc(1% * var(--scaler)), rgba(117, 117, 117, 0.2) 100%);
+}
+ */
+
+
