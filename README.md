@@ -1,69 +1,58 @@
-# React + TypeScript + Vite
+# CSS Gradient Animation
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-Currently, two official plugins are available:
+https://github.com/user-attachments/assets/a402a5d3-ee76-4b60-806f-2df569dc9e28
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Refactor CSS to use shared scaler property to synchronize gradient animation. 
+- In animation.css, the --scaler property is set to inherit:
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+```
+/* animation.css */
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+@property --scaler {
+  syntax: '<number>'; 
+  inherits: true;   
+  initial-value: 0;  
+}
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+@keyframes scalerKeyframes {
+  0% {
+    --scaler: 0;
+  }
+  100% {
+    --scaler: 100;
+  }
+}
+``` 
+- In calcualtor.css, the --scaler animation is started in the top-level div:
+```
+/* calculator.css */
+@import '../animation.css';
+
+.calculator .calculator__panel-top {
+  animation: scalerKeyframes 8s ease-in-out infinite alternate;
+ ...
+ }
+```
+- Then descendent divs use --scaler to drive their animations:
+```
+/* keyPad.css */
+@import '../animation.css';
+
+.keypad button {
+  background-image: linear-gradient(90deg, rgba(163, 163, 163, 0) 0%, rgba(255, 255, 255, .7) 
+    calc(1% * var(--scaler)), rgba(163, 163, 163, 0) 100%);
+   ...
+ }
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
 ```
+/* display.css */
+@import '../animation.css';
+
+.display {
+  background-image:   linear-gradient(90deg, rgba(117, 117, 117, 0.2) 0%, rgba(242, 26, 26, 0.45) calc(1% * var(--scaler)), rgba(117, 117, 117, 0.2) 100%);
+  ...
+ )
