@@ -1,30 +1,34 @@
 import React, { useState } from 'react';
-import { KeyPad } from '../KeyPad/KeyPad';
-import { Display } from '../Display/Display';
-import type { CalculatorKey, NumberKey } from '../../Types/Types';
-import './Calculator.css';
+import KeyPad from '../KeyPad/KeyPad';
+import Display from '../Display/Display';
+import type { CalculatorKey } from '../../Types/Types';
+import './calculator.css';
+
+export interface HandleKeyPadClickProps {
+  (newValue: CalculatorKey): void
+}
 
 const DIGITS_MAX = 6;
+const DEFAULT_DISPLAY_VALUE: CalculatorKey[] = [2,3,7];
 
+export default function Calculator(): React.JSX.Element {
+  const [displayValue, setDisplayValue] = useState<CalculatorKey[]>(DEFAULT_DISPLAY_VALUE);
 
-export const Calculator: React.FC = () => {
-  const [display, setDisplay] = useState<CalculatorKey[]>([]);
-
-  const handleKeyPadClick = (label: CalculatorKey) => {
-    setDisplay(display => {
-      return display.length < DIGITS_MAX
-        ? [...display, label]
-        : [label];
+  const handleKeyPadClick: HandleKeyPadClickProps = (newValue: CalculatorKey) => {
+    setDisplayValue(displayValue => {
+      return displayValue.length < DIGITS_MAX
+        ? [...displayValue, newValue]
+        : [newValue];
     });
   }
 
   return (
-      <div className="Calculator-container">
-        <div className="Calculator-parent">
-          <div className="Calculator-left-side"/>
-          <div className="Calculator-right-side"/>
+      <div className="calculator">
+        <div className="calculator calculator__panel-top">
+          <div className="calculator calculator__panel-left"/>
+          <div className="calculator calculator__panel-right"/>
           <Display 
-            display={display}
+            displayValue={displayValue}
           />
           <KeyPad
             onClickCallback={handleKeyPadClick}

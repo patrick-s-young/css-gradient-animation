@@ -2,16 +2,15 @@ import './Display.css';
 import type { CalculatorKey } from '../../Types/Types';
 
 interface DisplayProps {
-  display: CalculatorKey[];
+  displayValue: CalculatorKey[];
 }
 
-export const Display: React.FC<DisplayProps> = ({display}) => {
-  const displayString = display.join('');
+export default function Display({displayValue}: DisplayProps): React.JSX.Element {
+  const displayString = displayValue.join('');
   return (
-    <div className="Display-wrapper">
-      <div className="gradient"></div>
-      <div className="scanlines"></div>
-      <span className="Display-display">{displayString}</span>
+    <div className="display">
+      <div className="display display__scanlines"></div>
+      {displayString}
     </div>
   )
 }

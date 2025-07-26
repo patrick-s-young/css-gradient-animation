@@ -1,23 +1,23 @@
 import React from 'react';
-import './KeyPad.css';
 import type { CalculatorKey } from '../../Types/Types';
-const BUTTON_LABELS: CalculatorKey[] = Array.from({length: 9}, (_, index) => index + 1 as CalculatorKey);
+import type { HandleKeyPadClickProps } from '../Calculator/Calculator';
+import './keyPad.css';
 
 interface KeyPadProps {
-  onClickCallback: (label: CalculatorKey) => void
+  onClickCallback: HandleKeyPadClickProps
 }
 
-export const KeyPad: React.FC<KeyPadProps> = ({onClickCallback}) => {
+const BUTTON_LABELS: CalculatorKey[] = Array.from({length: 9}, (_, index) => index + 1 as CalculatorKey);
 
+export default function KeyPad({onClickCallback}: KeyPadProps): React.JSX.Element {
   return (
-      <div className="KeyPad-wrapper">
-        {BUTTON_LABELS.map((label) => (
+      <div className="keypad">
+        {BUTTON_LABELS.map((value) => (
           <button 
-            className={`key-${label}`}
-            key={label} 
-            onClick={() => onClickCallback(label)}
+            key={value} 
+            onClick={() => onClickCallback(value)}
           >
-            {label}
+            {value}
           </button>
         ))}
       </div>

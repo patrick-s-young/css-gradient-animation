@@ -1,15 +1,10 @@
 import './App.css'
-//import Phone from './components/Phone/Phone'
-import { Calculator } from './components/Calculator/Calculator'
+import Calculator from './components/Calculator/Calculator'
 
-function App() {
-
-
+export default function App() {
   return (
     <>
       <Calculator />
     </>
   )
 }
-
-export default App
