@@ -1,15 +1,14 @@
 @import '../animation.css';
 
-
-.Calculator-container {
+.calculator {
   /* layout */
   position: relative;
   width: 300px;
   height: 500px;
-  perspective: 1000px;
+  perspective: 1100px;
 }
 
-.Calculator-parent {
+.calculator .calculator__panel-top {
   /* layout */
   box-sizing: border-box;
   position: absolute;
@@ -23,25 +22,26 @@
   /* style */
   border-radius: 5px;
   transform-style: preserve-3d;
-  animation: scalerKeyframes 10s ease-in-out infinite alternate;
+  animation: scalerKeyframes 8s ease-in-out infinite alternate;
   transform: rotateY(calc(1deg * (-30 + var(--scaler) * 60/100)));
- 
-  background-image: linear-gradient(90deg, rgba(117, 117, 117, 0.2) 0%, rgba(219, 219, 219, .8) calc(1% * var(--scaler)), rgba(117, 117, 117, 0.2) 100%),
-  url('/brushed-metal-600x428.jpg');
+  background-image: linear-gradient(90deg, rgba(117, 117, 117, 0.2) 0%, rgba(219, 219, 219, .8) calc(1% * var(--scaler)), rgba(117, 117, 117, 0.2) 100%), url('/brushed-metal-600x428.jpg');
   box-shadow: calc(1px * (50 - var(--scaler) * 1)) 1cqmax 20px 10px rgba(0, 0, 0, 0.1);
 }
 
-.Calculator-left-side {
+.calculator .calculator__panel-left {
+  /* layout */
   width: 40px;
   height: 500px;
   position: absolute;
   left: -20px;
   top: 0;
+  /* style */
   transform: translateZ(-20px) rotateY(-90deg);
   background-color: var(--side-panel-color, gray);
 }
 
-.Calculator-right-side {
+.calculator .calculator__panel-right {
+  /* layout */
   width: 40px;
   height: 500px;
   position: absolute;
